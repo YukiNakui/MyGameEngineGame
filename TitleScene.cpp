@@ -2,8 +2,7 @@
 #include"Engine/Sprite.h"
 
 TitleScene::TitleScene(GameObject* parent)
-	:GameObject(parent,"TitleScene
-")
+	:GameObject(parent,"TitleScene")
 {
 }
 
