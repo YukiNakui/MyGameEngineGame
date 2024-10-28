@@ -89,6 +89,9 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>ソース ファイル\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="OdenTitle.cpp">
+      <Filter>ソース ファイル\GameOBJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Camera.h">
@@ -150,6 +153,9 @@
     </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>ソース ファイル\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="OdenTitle.h">
+      <Filter>ソース ファイル\GameOBJ</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
