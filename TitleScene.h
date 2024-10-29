@@ -1,9 +1,11 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include"Engine/Sprite.h"
 
 class TitleScene :
     public GameObject
 {
+	Sprite* pTitlePict;
 public:
 	TitleScene(GameObject* parent);
 	~TitleScene();

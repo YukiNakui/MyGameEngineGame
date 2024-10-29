@@ -1,9 +1,7 @@
 #include "TitleScene.h"
-#include"Player.h"
-#include"OdenTitle.h"
 
 TitleScene::TitleScene(GameObject* parent)
-	:GameObject(parent,"TitleScene")
+	:GameObject(parent,"TitleScene"),pTitlePict(nullptr)
 {
 }
 
@@ -13,8 +11,8 @@ TitleScene::~TitleScene()
 
 void TitleScene::Initialize()
 {
-	Instantiate<Player>(this);
-	Instantiate<OdenTitle>(this);
+	pTitlePict = new Sprite;
+	pTitlePict->Load("Assets/ODEN_TITLE.png");
 }
 
 void TitleScene::Update()
@@ -23,6 +21,7 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
+	pTitlePict->Draw(transform_);
 }
 
 void TitleScene::Release()
