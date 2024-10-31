@@ -93,6 +93,12 @@ GameObject* GameObject::FindChildObject(std::string objName)
 	return nullptr;
 }
 
+//オブジェクトの名前を取得
+const std::string& GameObject::GetObjectName(void) const
+{
+	return objectName_;
+}
+
 void GameObject::AddCollider(SphereCollider* pCollider)
 {
 	pCollider_ = pCollider;

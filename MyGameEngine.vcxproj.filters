@@ -92,6 +92,9 @@
     <ClCompile Include="OdenTitle.cpp">
       <Filter>ソース ファイル\GameOBJ</Filter>
     </ClCompile>
+    <ClCompile Include="CDTimer.cpp">
+      <Filter>ソース ファイル\GameOBJ</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Camera.h">
@@ -155,6 +158,9 @@
       <Filter>ソース ファイル\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="OdenTitle.h">
+      <Filter>ソース ファイル\GameOBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="CDTimer.h">
       <Filter>ソース ファイル\GameOBJ</Filter>
     </ClInclude>
   </ItemGroup>

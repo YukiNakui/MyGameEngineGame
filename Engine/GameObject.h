@@ -41,6 +41,10 @@ public:
 	GameObject* FindObject(std::string objName);
 	GameObject* GetRootJob();
 	GameObject* FindChildObject(std::string objName);
+
+	//オブジェクトの名前を取得
+    //戻値：名前
+	const std::string& GetObjectName(void) const;
 	
 	void AddCollider(SphereCollider* pCollider);
 	void Collision(GameObject* pTarget);

@@ -1,9 +1,17 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include"Player.h"
+#include"Enemy.h"
+#include"CDTimer.h"
+#include"Engine/Sprite.h"
 
 class PlayScene :
     public GameObject
 {
+	Player* pPlayer;
+	Enemy* pEnemy;
+	CDTimer* pCDTimer;
+	Sprite* pGOPict;
 public:
 	PlayScene(GameObject* parent);
 	~PlayScene();
