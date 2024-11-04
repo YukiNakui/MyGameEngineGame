@@ -27,7 +27,7 @@ void Player::Initialize()
 	transform_.position_ = { 0,-3,0 };
 	transform_.scale_ = { 0.5,0.5,0.5 };
 	transform_.rotate_.x = 90.0f;
-	SphereCollider* col = new SphereCollider(0.5f);//半径0.5のコライダー
+	SphereCollider* col = new SphereCollider(1.0f);//半径0.5のコライダー
 	this->AddCollider(col);//コライダーをアタッチ
 }
 
@@ -41,12 +41,23 @@ void Player::Update()
 	time ++;
 	transform_.position_.y = sinf(1 - (time/30.0f)) * rad - 3.0f;
 
-	if (Input::IsKeyDown(DIK_SPACE)) {
-		GameObject* pCO = Instantiate<ChildOden>(this);
-		pCO->SetPosition(transform_.position_);
-		pCO->SetScale(0.2f, 0.2f, 0.2f);
-		pCO->SetRotateZ(90.0f);
-		pCO->SetRotateY(90.0f);
+	if (!isDead) {
+		if (Input::IsKeyDown(DIK_SPACE)) {
+			GameObject* pCO = Instantiate<ChildOden>(this);
+			pCO->SetPosition(transform_.position_);
+			pCO->SetScale(0.2f, 0.2f, 0.2f);
+			pCO->SetRotateZ(90.0f);
+			pCO->SetRotateY(90.0f);
+		}
+
+		if (Input::IsKey(DIK_LEFTARROW)) {
+			if (transform_.position_.x >= -4.0f)
+				transform_.position_.x -= 0.3f;
+		}
+		else if (Input::IsKey(DIK_RIGHTARROW)) {
+			if (transform_.position_.x <= 4.0f)
+				transform_.position_.x += 0.3f;
+		}
 	}
 }
 

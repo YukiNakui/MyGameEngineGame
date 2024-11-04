@@ -12,6 +12,8 @@ class PlayScene :
 	Enemy* pEnemy;
 	CDTimer* pCDTimer;
 	Sprite* pGOPict;
+	float startCountTime;
+	//bool isStartCountNow;
 public:
 	PlayScene(GameObject* parent);
 	~PlayScene();
