@@ -22,6 +22,7 @@ class PlayScene :
 	Sprite* pReadyPict;
 	Sprite* pGoPict;
 
+	Transform gameOverTrs;
 	Transform readyTrs;
 	Transform goTrs;
 public:

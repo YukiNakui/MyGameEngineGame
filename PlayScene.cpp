@@ -31,7 +31,7 @@ void PlayScene::Initialize()
 	pReadyPict->Load("Assets/READY.png");
 	pGoPict = new Sprite;
 	pGoPict->Load("Assets/GO.png");
-	transform_.scale_.y = 0.1f;
+	gameOverTrs.scale_.y = 0.1f;
 	readyTrs.scale_.y = 0.5f;
 	goTrs.scale_.y = 0.5f;
 }
@@ -61,8 +61,8 @@ void PlayScene::Update()
 	}
 
 	if (pPlayer->IsPlayerDead()) {
-		if (transform_.scale_.y < 0.5f)
-			transform_.scale_.y += 0.01f;
+		if (gameOverTrs.scale_.y < 0.5f)
+			gameOverTrs.scale_.y += 0.01f;
 		if (Input::IsKeyDown(DIK_RETURN)) {
 			SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 			pSceneManager->ChangeScene(SCENE_ID_TITLE);
@@ -86,7 +86,7 @@ void PlayScene::Draw()
 		break;
 	}
 	if (pPlayer->IsPlayerDead()) {
-		pGameOverPict->Draw(transform_);
+		pGameOverPict->Draw(gameOverTrs);
 	}
 }
 
