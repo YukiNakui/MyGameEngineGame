@@ -3,11 +3,15 @@
 #include"Engine/SceneManager.h"
 #include"Engine/Direct3D.h"
 
-const int RESPAWN_TIME = 1.5;
+namespace {
+	const float RESPAWN_TIME = 1.5f;
+	const float READY_TYME = 1.5f;
+	const float GO_TYME = 1.5f;
+}
 
 PlayScene::PlayScene(GameObject* parent)
-	:GameObject(parent,"PlayScene"),pPlayer(nullptr),pEnemy(nullptr),pCDTimer(nullptr),pGOPict(nullptr),
-	startCountTime(3.0f)
+	:GameObject(parent,"PlayScene"),pPlayer(nullptr),pEnemy(nullptr),pCDTimer(nullptr),
+	pGameOverPict(nullptr),pReadyPict(nullptr),pGoPict(nullptr),state(READY)
 {
 }
 
@@ -20,25 +24,45 @@ void PlayScene::Initialize()
 	pPlayer = Instantiate<Player>(this);
 	//pEnemy = Instantiate<Enemy>(this);
 	pCDTimer = Instantiate<CDTimer>(this);
-	pCDTimer->SetInitTime(startCountTime);
-	pGOPict = new Sprite;
-	pGOPict->Load("Assets/YOUEATEN.png");
-	transform_.scale_.y = 0.5f;
+	pCDTimer->SetInitTime(READY_TYME);
+	pGameOverPict = new Sprite;
+	pGameOverPict->Load("Assets/YOUEATEN.png");
+	pReadyPict = new Sprite;
+	pReadyPict->Load("Assets/READY.png");
+	pGoPict = new Sprite;
+	pGoPict->Load("Assets/GO.png");
+	transform_.scale_.y = 0.1f;
+	readyTrs.scale_.y = 0.5f;
+	goTrs.scale_.y = 0.5f;
 }
 
 void PlayScene::Update()
 {
 	if (pCDTimer->IsTimeOver()) {
-		//isStartCountNow = false;
-		//pCDTimer->SetInitTime(RESPAWN_TIME);
 		if (!pPlayer->IsPlayerDead()) {
-			pEnemy = Instantiate<Enemy>(this);
-			pCDTimer->SetInitTime(RESPAWN_TIME);
+			switch (state)
+			{
+			case PlayScene::READY:
+				state = GO;
+				pCDTimer->SetInitTime(GO_TYME);
+				break;
+			case PlayScene::GO:
+				state = PLAY;
+				pCDTimer->SetInitTime(RESPAWN_TIME);
+				break;
+			case PlayScene::PLAY:
+				pEnemy = Instantiate<Enemy>(this);
+				pCDTimer->ResetTimer();
+				break;
+			default:
+				break;
+			}
 		}
-		//pCDTimer->ResetTimer();
 	}
 
 	if (pPlayer->IsPlayerDead()) {
+		if (transform_.scale_.y < 0.5f)
+			transform_.scale_.y += 0.01f;
 		if (Input::IsKeyDown(DIK_RETURN)) {
 			SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 			pSceneManager->ChangeScene(SCENE_ID_TITLE);
@@ -48,14 +72,24 @@ void PlayScene::Update()
 
 void PlayScene::Draw()
 {
+	switch (state)
+	{
+	case PlayScene::READY:
+		pReadyPict->Draw(readyTrs);
+		break;
+	case PlayScene::GO:
+		pGoPict->Draw(goTrs);
+		break;
+	case PlayScene::PLAY:
+		break;
+	default:
+		break;
+	}
 	if (pPlayer->IsPlayerDead()) {
-		pGOPict->Draw(transform_);
+		pGameOverPict->Draw(transform_);
 	}
 }
 
 void PlayScene::Release()
 {
-	//SAFE_DELETE(pPlayer);
-	//SAFE_DELETE(pEnemy);
-	//SAFE_DELETE(pCDTimer);
 }

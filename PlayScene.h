@@ -8,12 +8,22 @@
 class PlayScene :
     public GameObject
 {
+	enum STATE {
+		READY,
+		GO,
+		PLAY
+	};
+	STATE state;
+
 	Player* pPlayer;
 	Enemy* pEnemy;
 	CDTimer* pCDTimer;
-	Sprite* pGOPict;
-	float startCountTime;
-	//bool isStartCountNow;
+	Sprite* pGameOverPict;
+	Sprite* pReadyPict;
+	Sprite* pGoPict;
+
+	Transform readyTrs;
+	Transform goTrs;
 public:
 	PlayScene(GameObject* parent);
 	~PlayScene();
